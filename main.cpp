@@ -5,46 +5,44 @@
 #include "../biocro-dev-pristine/src/module_library/module_library.h"
 
 #include "../biocro-dev-pristine/src/module_library/module_graph_test.hpp"
-//#include "../example_biocro_module_library/src/module_library/Module_3.h"
 
-//#include "../example_biocro_module_library/src/module_library/module_library.h"
-//module_creator* create_Module_3_mc();
 using namespace std;
+using BioCro::module_factory;
 
 void module_info(module_creator* w, bool verbose);
 
 void print_mods(string heading, string_vector mods);
 
 int main() {
-    string name { "Module_3" };
-
-    // Get the module_creator pointer
-    module_creator* mc1 = new module_creator_impl<Module_3>;
+    string name { "Module_4" };
 
 
-    printf("Module_3 mc1 pointer is %p\n", mc1);
+    ////////////////////////////////////////////////////////////////////////////////
+    // Testing out module_creator_impl
+    ////////////////////////////////////////////////////////////////////////////////
     
+    // Get the module_creator pointer using module_creator_impl
+    module_creator* mc1 = new module_creator_impl<Module_3>;
+    printf("Module_3 mc1 pointer is %p\n", mc1);
+    printf("Printing module info:\n\n");
     module_info(mc1, true);
-
-    string_vector mods1 = module_factory::get_all_modules();
-
-    print_mods("Modules in BioCro library", mods1);
-
-
 
     printf("------------------------------------------\n\n");
 
-        
-    // Get the module_creator pointer
-    module_creator* mc2 = module_factory::retrieve(name);
-    
+    ////////////////////////////////////////////////////////////////////////////////
+    // Testing get_all_modules
+    ////////////////////////////////////////////////////////////////////////////////
+
+    string_vector mods1 = module_factory::get_all_modules();
+    print_mods("First 8 modules in BioCro library", mods1);
+
+    printf("------------------------------------------\n\n");
+
+    // Get the module_creator pointer using retrieve
+    module_creator* mc2 = exampleLibrary::module_factory::retrieve(name);
     printf("Module_3 mc2 pointer is %p\n", mc2);
-    
+    printf("Printing module info:\n\n");
     module_info(mc2, true);
-
-    string_vector mods2 = module_factory::get_all_modules();
-
-    print_mods("Modules in example_module_library", mods2);
 }
 
 
@@ -53,7 +51,7 @@ void print_mods(string heading, string_vector mods) {
     int i {0};
     for (string &mod : mods) {
         printf("%s\n", mod.c_str());
-        if (++i > 8) break;
+        if (++i >= 8) break;
     }
     printf("\n");
 }
