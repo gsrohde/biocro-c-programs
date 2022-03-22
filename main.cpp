@@ -4,7 +4,9 @@
 #include "../example_biocro_module_library/src/framework/module_factory.h"
 #include "../biocro-dev-pristine/src/framework/module_factory.h"
 
-//#include "../biocro-dev-pristine/src/module_library/module_graph_test.hpp"
+#include "../biocro-dev-pristine/src/module_library/module_graph_test.hpp" // For Module_3
+#include "../example_biocro_module_library/src/module_library/Module_3.h" // For Module_3
+
 
 using namespace std;
 
@@ -19,7 +21,7 @@ int main() {
     string_vector mods1 = BioCro::module_factory::get_all_modules();
     print_mods("First 8 modules in BioCro library", mods1);
 
-    printf("------------------------------------------\n\n");
+    printf("---------------------Get Module_3 info from BioCro---------------------\n\n");
 
     // Get the module_creator pointer using retrieve
     module_creator* mc1 = BioCro::module_factory::retrieve(name);
@@ -32,13 +34,37 @@ int main() {
     string_vector mods2 = exampleLibrary::module_factory::get_all_modules();
     print_mods("First 8 modules in exampleLibrary library", mods2);
 
-    printf("------------------------------------------\n\n");
+    printf("---------------------Get Module_3 info from exampleLibrary---------------------\n\n");
 
     // Get the module_creator pointer using retrieve
     module_creator* mc2 = exampleLibrary::module_factory::retrieve(name);
     printf("Module_3 mc2 pointer is %p\n", mc2);
     printf("Printing module info:\n\n");
     module_info(mc2, true);
+
+    ////////////////////////////////////////////////////////////////////////////////
+    // Testing out module_creator_impl
+    ////////////////////////////////////////////////////////////////////////////////
+
+    printf("---------------------Get Module_3 module creator pointer directly---------------------\n\n");
+    
+    // Get the module_creator pointer using module_creator_impl
+    module_creator* mc3 = new module_creator_impl<Module_3>;
+    printf("Module_3 mc3 pointer is %p\n", mc3);
+    printf("Printing module info:\n\n");
+    module_info(mc3, true);
+
+    printf("---------------------Get exampleLibrary::Module_3 module creator pointer directly---------------------\n\n");
+
+    ////////////////////////////////////////////////////////////////////////////////
+    // Testing out module_creator_impl
+    ////////////////////////////////////////////////////////////////////////////////
+    
+    // Get the module_creator pointer using module_creator_impl
+    module_creator* mc4 = new module_creator_impl<exampleLibrary::Module_3>;
+    printf("Module_3 mc4 pointer is %p\n", mc4);
+    printf("Printing module info:\n\n");
+    module_info(mc4, true);
 
 }
 
