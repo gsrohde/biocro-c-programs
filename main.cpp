@@ -1,26 +1,69 @@
 #include <stdio.h>
 #include <vector>
 #include <string>
-#include "../biocro-dev-pristine/src/framework/state_map.h"
-#include "../biocro-dev-pristine/src/framework/module_creator.h"
-#include "../biocro-dev-pristine/src/framework/module.h"
-#include "../biocro-dev-pristine/src/module_library/standard_module_library.h"
-#include "../example_biocro_module_library/src/module_library/standard_module_library.h"
+#include "../example_biocro_module_library/src/framework/module_creator.h"
+#include "../biocro-dev-pristine/src/module_library/module_library.h"
 
+#include "../biocro-dev-pristine/src/module_library/module_graph_test.hpp"
+//#include "../example_biocro_module_library/src/module_library/Module_3.h"
+
+//#include "../example_biocro_module_library/src/module_library/module_library.h"
+//module_creator* create_Module_3_mc();
 using namespace std;
 
-void module_info(string name, bool verbose);
+void module_info(module_creator* w, bool verbose);
+
+void print_mods(string heading, string_vector mods);
 
 int main() {
-    module_info("Module_3", true);
+    string name { "Module_3" };
+
+    // Get the module_creator pointer
+    module_creator* mc1 = new module_creator_impl<Module_3>;
+
+
+    printf("Module_3 mc1 pointer is %p\n", mc1);
+    
+    module_info(mc1, true);
+
+    string_vector mods1 = module_factory::get_all_modules();
+
+    print_mods("Modules in BioCro library", mods1);
+
+
+
+    printf("------------------------------------------\n\n");
+
+        
+    // Get the module_creator pointer
+    module_creator* mc2 = module_factory::retrieve(name);
+    
+    printf("Module_3 mc2 pointer is %p\n", mc2);
+    
+    module_info(mc2, true);
+
+    string_vector mods2 = module_factory::get_all_modules();
+
+    print_mods("Modules in example_module_library", mods2);
 }
 
-void module_info(string name, bool verbose)
+
+void print_mods(string heading, string_vector mods) {
+    printf("%s:\n\n", heading.c_str());
+    int i {0};
+    for (string &mod : mods) {
+        printf("%s\n", mod.c_str());
+        if (++i > 8) break;
+    }
+    printf("\n");
+}
+
+
+
+
+void module_info(module_creator* w, bool verbose)
 {
     try {
-        // Get the module_creator pointer
-        module_creator* w = module_library<standard_module_library>::retrieve(name);
-
         // Get the module's name
         std::string module_name = w->get_name();
 
