@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string>
 #include "../example_biocro_module_library/src/framework/module_factory.h"
-#include "../biocro-dev-pristine/src/framework/module_factory.h"
+#include "../biocro-dev/src/framework/module_factory.h"
 
 using std::string;
 

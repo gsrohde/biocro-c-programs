@@ -1,5 +1,5 @@
-#include "../biocro-dev-pristine/src/framework/module_creator.h"
-#include "../biocro-dev-pristine/src/module_library/module_graph_test.hpp" // For Module_3
+#include "../biocro-dev/src/framework/module_creator.h"
+#include "../biocro-dev/src/module_library/module_graph_test.hpp" // For Module_3
 #include "../example_biocro_module_library/src/module_library/Module_3.h" // For Module_3
 
 void module_info(module_creator*, bool);

@@ -1,6 +1,6 @@
-#include "../biocro-dev-pristine/src/framework/module_creator.h"
-#include "../biocro-dev-pristine/src/framework/module_helper_functions.h"
-#include "../biocro-dev-pristine/src/framework/state_map.h"
+#include "../biocro-dev/src/framework/module_creator.h"
+#include "../biocro-dev/src/framework/module_helper_functions.h"
+#include "../biocro-dev/src/framework/state_map.h"
 
 using std::string;
 using std::vector;

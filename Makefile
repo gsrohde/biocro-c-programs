@@ -1,10 +1,14 @@
+BIOCRO_LIB = ../biocro-dev/src/BioCro.so
+EXAMPLE_LIB = ../example_biocro_module_library/src/exampleLibrary.so
+
 all: main main2
 
-main: main.o test_module_creator_impl.o test_module_factory.o utils.o BioCro.so exampleLibrary.so
-	clang++ -o main main.o test_module_creator_impl.o test_module_factory.o utils.o BioCro.so exampleLibrary.so 
+main: main.o test_module_creator_impl.o test_module_factory.o utils.o $(BIOCRO_LIB) $(EXAMPLE_LIB)
+	clang++ -o main main.o test_module_creator_impl.o test_module_factory.o utils.o $(BIOCRO_LIB) $(EXAMPLE_LIB)
 
-main2: main.o test_module_creator_impl.o test_module_factory.o utils.o BioCro.so exampleLibrary.so
-	clang++ -o main2 main.o test_module_creator_impl.o test_module_factory.o utils.o exampleLibrary.so BioCro.so
+# Change the link order for the module libraries:
+main2: main.o test_module_creator_impl.o test_module_factory.o utils.o $(BIOCRO_LIB) $(EXAMPLE_LIB)
+	clang++ -o main2 main.o test_module_creator_impl.o test_module_factory.o utils.o $(EXAMPLE_LIB) $(BIOCRO_LIB)
 
 main.o: main.cpp
 	clang++ -mmacosx-version-min=10.13 -std=gnu++11 -I"/Library/Frameworks/R.framework/Resources/include" -DNDEBUG  -I/usr/local/include   -fPIC  -Wall -g -O2  -c main.cpp
