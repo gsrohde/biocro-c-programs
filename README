@@ -1,3 +1,5 @@
-BioCro.so built from dac34f44084ff3ef9e09f0ba6da055e9fb5be1e0 on no_template_module_factory branch.
+VERSIONS OF LIBRARIES USED:
 
-exampleLibrary.so built from 4ddaccb410186e4eacd4f58d1633bfe786d9c337 on no_template_module_factory branch.
+BioCro.so built from 25e50ddcd7001db1175a7c23419a7e77644c1f89 on namespaced_modules branch.
+
+exampleLibrary.so built from f5030d1356df7c4cef94be7e61fd2b2e610b036c on namespaced_modules branch.

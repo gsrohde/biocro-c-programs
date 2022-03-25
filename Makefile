@@ -1,5 +1,6 @@
-BIOCRO_LIB = ../biocro-dev/src/BioCro.so
-EXAMPLE_LIB = ../example_biocro_module_library/src/exampleLibrary.so
+LIBRARY_FILE_EXTENSION = so
+BIOCRO_LIB = $(shell Rscript -e "cat(system.file('libs', 'BioCro.$(LIBRARY_FILE_EXTENSION)', package = 'BioCro'))")
+EXAMPLE_LIB = $(shell Rscript -e "cat(system.file('libs', 'exampleLibrary.$(LIBRARY_FILE_EXTENSION)', package = 'exampleLibrary'))")
 
 all: main main2
 
